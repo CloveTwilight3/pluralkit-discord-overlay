@@ -38,3 +38,8 @@ declare module '*.gif' {
   const content: string;
   export default content;
 }
+
+// Import date-fns for formattedDistance
+declare module 'date-fns' {
+  export function formatDistanceToNow(date: Date | number | string, options?: { addSuffix?: boolean }): string;
+}

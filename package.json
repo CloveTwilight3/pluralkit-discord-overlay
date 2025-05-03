@@ -4,13 +4,17 @@
   "description": "A Discord client modification that displays PluralKit system fronting information in voice channels",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "type-check": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "prepare": "husky install"
+  "dev": "vite",
+  "build": "node build.js",
+  "build:bd": "node build.js --bd",
+  "build:vencord": "node build.js --vencord",
+  "build:powercord": "node build.js --powercord",
+  "build:all": "npm run build && npm run build:bd && npm run build:vencord && npm run build:powercord",
+  "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+  "type-check": "tsc --noEmit",
+  "test": "vitest run",
+  "test:watch": "vitest",
+  "prepare": "husky install"
   },
   "keywords": [
     "discord",
@@ -32,10 +36,11 @@
   },
   "homepage": "https://github.com/CloveTwilight3/pluralkit-discord-overlay#readme",
   "dependencies": {
+    "axios": "^1.6.2",
+    "date-fns": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^6.1.1",
-    "axios": "^1.6.2",
     "zustand": "^4.4.6"
   },
   "devDependencies": {
@@ -64,5 +69,11 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "tsconfig": {
+    "compilerOptions": {
+      "noImplicitAny": "false",
+      "skipLibCheck": "true"
+    }
   }
 }
