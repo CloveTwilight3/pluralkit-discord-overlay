@@ -1,0 +1,126 @@
+/* Global styles for PluralKit Discord Overlay */
+
+/* Reset default styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure the overlay container doesn't affect Discord */
+#pluralkit-overlay-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  z-index: 9997;
+  pointer-events: none;
+}
+
+/* Make interactive elements respond to pointer events */
+#pluralkit-overlay-container button,
+#pluralkit-overlay-container input,
+#pluralkit-overlay-container select,
+#pluralkit-overlay-container .draggable,
+#pluralkit-overlay-container .clickable {
+  pointer-events: auto;
+}
+
+/* Custom scrollbar for overlay components */
+.pk-overlay-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.pk-overlay-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.pk-overlay-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.pk-overlay-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Dark mode theme variables */
+:root {
+  --pk-bg-dark: rgba(30, 30, 30, 0.8);
+  --pk-bg-light: rgba(240, 240, 240, 0.8);
+  --pk-text-dark: #dcdcdc;
+  --pk-text-light: #2c2c2c;
+  --pk-accent: #7289da;
+  --pk-accent-hover: #5c6fb1;
+  --pk-error: #ed4245;
+  --pk-success: #43b581;
+  --pk-warning: #faa61a;
+  --pk-backdrop-filter: blur(5px);
+  --pk-tooltip-background: rgba(0, 0, 0, 0.8);
+  --pk-tooltip-text: #ffffff;
+}
+
+/* Animation definitions */
+@keyframes pk-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pk-slide-up {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pk-pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* Animation classes */
+.pk-animate-fade {
+  animation: pk-fade-in 0.3s ease-in-out;
+}
+
+.pk-animate-slide-up {
+  animation: pk-slide-up 0.3s ease-out;
+}
+
+.pk-animate-pulse {
+  animation: pk-pulse 2s infinite ease-in-out;
+}
+
+/* Tooltip styles */
+.pk-tooltip {
+  position: relative;
+}
+
+.pk-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: var(--pk-tooltip-background);
+  color: var(--pk-tooltip-text);
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.pk-tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
