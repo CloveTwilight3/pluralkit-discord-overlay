@@ -1,0 +1,39 @@
+# Exclude node modules
+node_modules
+
+# Exclude build artifacts
+dist
+build
+
+# Exclude Git and CI/CD files
+.git
+.github
+.gitlab-ci.yml
+
+# Exclude development and test files
+.vscode
+.idea
+*.test.ts
+*.test.tsx
+/tests
+/coverage
+
+# Exclude Docker files (to prevent build context issues)
+Dockerfile
+Dockerfile.dev
+docker-compose.yml
+.dockerignore
+
+# Exclude environment files
+.env*
+!.env.example
+
+# Exclude logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Exclude OS specific files
+.DS_Store
+Thumbs.db

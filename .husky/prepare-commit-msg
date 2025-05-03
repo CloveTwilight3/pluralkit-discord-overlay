@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Add branch name to commit message if it follows the pattern feature/XXX or fix/XXX
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+if [[ $BRANCH_NAME =~ ^(feature|fix|docs|chore|refactor|test|style|perf)/(.+)$ ]]; then
+  PREFIX=$(echo $BRANCH_NAME | cut -d/ -f1)
+  TICKET=$(echo $BRANCH_NAME | cut -d/ -f2)
+  
+  # Only add prefix if not already in commit message
+  if ! grep -qE "^\[$PREFIX" "$1"; then
+    sed -i.bak -e "1s/^/[$PREFIX] /" "$1"
+  fi
+fi
